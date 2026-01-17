@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProMaallem - Trouvez le bon artisan en un clic</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .bg-bleu-nuit {
+            background-color: #1a202c;
+        }
+
+        /* Fallback/Simple Dark Blue */
+        .text-bleu-nuit {
+            color: #1a202c;
+        }
+
+        .bg-bleu-royal {
+            background-color: #3182ce;
+        }
+
+        /* Standard Blue */
+        .text-bleu-royal {
+            color: #3182ce;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html">
+                        <img src="logo-promaallem.png" alt="ProMaallem" class="h-12 w-auto">
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-900 font-medium hover:text-blue-600">Accueil</a>
+                    <a href="artisans.html" class="text-gray-500 hover:text-gray-900">Nos Artisans</a>
+                    <a href="services.html" class="text-gray-500 hover:text-gray-900">Services</a>
+                    <a href="contact.html" class="text-gray-500 hover:text-gray-900">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="login.html" class="text-gray-600 hover:text-gray-900 font-medium">Connexion</a>
+                    <a href="signup.html"
+                        class="bg-blue-600 text-white px-5 py-2.5 rounded-lg hover:bg-blue-700 font-medium transition">S'inscrire</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6">
+                Trouvez un professionnel <br>
+                <span class="text-blue-600">de confiance</span> pour vos travaux
+            </h1>
+            <p class="text-xl text-gray-500 mb-10 max-w-2xl">
+                Plomberie, électricité, peinture... Réservez les meilleurs artisans de votre région en quelques clics.
+            </p>
+
+            <!-- Search Bar -->
+            <div class="w-full max-w-2xl relative">
+                <div class="relative shadow-lg rounded-full bg-white z-20">
+                    <form onsubmit="handleSmartSearch(event)" class="flex">
+                        <div class="relative flex-grow">
+                            <span class="absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                <i data-lucide="search" class="w-5 h-5"></i>
+                            </span>
+                            <input type="text" name="q" placeholder="Décrivez votre problème (ex: Fuite d'eau cuisine)"
+                                class="w-full py-4 pl-12 pr-4 rounded-l-full border-gray-200 focus:ring-2 focus:ring-blue-500 border-r-0 outline-none text-gray-700">
+                        </div>
+                        <button type="submit"
+                            class="bg-blue-600 text-white px-8 py-4 rounded-r-full hover:bg-blue-700 font-bold transition flex items-center gap-2">
+                            <span>Diagnostic</span>
+                            <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- AI Loading State -->
+                <div id="ai-loading"
+                    class="hidden absolute top-full left-0 w-full mt-4 bg-white/90 backdrop-blur rounded-xl p-4 shadow-lg text-center z-10 transition-all">
+                    <div class="flex flex-col items-center gap-2 text-blue-600">
+                        <i data-lucide="loader-2" class="w-8 h-8 animate-spin"></i>
+                        <span class="font-medium">L'IA de ProMaallem analyse votre demande...</span>
+                    </div>
+                </div>
+
+                <!-- AI Results Container -->
+                <div id="ai-results-container" class="relative z-10"></div>
+            </div>
+
+            <!-- Tags -->
+            <div class="mt-8 flex flex-wrap justify-center gap-3">
+                <span class="text-sm text-gray-500 font-medium">Populaire :</span>
+                <a href="#"
+                    class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600 hover:bg-gray-200">Plomberie</a>
+                <a href="#"
+                    class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600 hover:bg-gray-200">Électricité</a>
+                <a href="#"
+                    class="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600 hover:bg-gray-200">Climatisation</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mode Urgence (Mode Commando) -->
+    <section class="max-w-5xl mx-auto px-4 -mt-10 relative z-10 mb-20">
+        <div class="bg-white rounded-3xl shadow-xl p-8 border-2 border-red-50 relative overflow-hidden">
+            <!-- Background Pulse Effect -->
+            <div
+                class="absolute top-0 right-0 w-32 h-32 bg-red-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse">
+            </div>
+
+            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="text-center md:text-left">
+                    <h2
+                        class="text-2xl font-bold text-gray-900 flex items-center justify-center md:justify-start gap-3">
+                        <span class="relative flex h-3 w-3">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                        </span>
+                        GROS PROBLÈME ?
+                    </h2>
+                    <p class="text-red-500 font-medium mt-1">Intervention prioritaire en < 30 min</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full md:w-auto">
+                    <!-- Bouton Fuite -->
+                    <button onclick="triggerEmergency('Fuite d\'eau', 'plomberie')"
+                        class="group flex items-center gap-3 bg-red-50 hover:bg-red-600 border border-red-100 px-5 py-4 rounded-xl transition-all duration-300">
+                        <div class="bg-white p-2 rounded-lg text-red-500 group-hover:text-red-600 transition-colors">
+                            <i data-lucide="droplet" class="w-5 h-5"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="block text-sm font-bold text-gray-800 group-hover:text-white">Fuite
+                                d'eau</span>
+                            <span class="block text-xs text-red-400 group-hover:text-red-100">Urgence</span>
+                        </div>
+                    </button>
+
+                    <!-- Bouton Panne Elec -->
+                    <button onclick="triggerEmergency('Panne Électrique', 'electricite')"
+                        class="group flex items-center gap-3 bg-red-50 hover:bg-red-600 border border-red-100 px-5 py-4 rounded-xl transition-all duration-300">
+                        <div class="bg-white p-2 rounded-lg text-red-500 group-hover:text-red-600 transition-colors">
+                            <i data-lucide="zap-off" class="w-5 h-5"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="block text-sm font-bold text-gray-800 group-hover:text-white">Panne Élec</span>
+                            <span class="block text-xs text-red-400 group-hover:text-red-100">Coupure</span>
+                        </div>
+                    </button>
+
+                    <!-- Bouton Porte -->
+                    <button onclick="triggerEmergency('Porte Bloquée', 'serrurerie')"
+                        class="group flex items-center gap-3 bg-red-50 hover:bg-red-600 border border-red-100 px-5 py-4 rounded-xl transition-all duration-300">
+                        <div class="bg-white p-2 rounded-lg text-red-500 group-hover:text-red-600 transition-colors">
+                            <i data-lucide="lock" class="w-5 h-5"></i>
+                        </div>
+                        <div class="text-left">
+                            <span class="block text-sm font-bold text-gray-800 group-hover:text-white">Porte
+                                Bloquée</span>
+                            <span class="block text-xs text-red-400 group-hover:text-red-100">Serrure</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features / Steps -->
+    <div class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">Comment ça marche ?</h2>
+                <p class="text-gray-500 mt-2">C'est simple, rapide et sécurisé</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div
+                        class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="search" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">1. Cherchez</h3>
+                    <p class="text-gray-500">Trouvez l'artisan idéal grâce aux avis vérifiés et aux profils détaillés.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div
+                        class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="calendar" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">2. Réservez</h3>
+                    <p class="text-gray-500">Choisissez le créneau qui vous convient et réservez instantanément.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div
+                        class="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="check-circle" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">3. Validez</h3>
+                    <p class="text-gray-500">Payez en toute sécurité après la réalisation de la prestation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <div class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Nos Catégories</h2>
+                <a href="services.html" class="text-blue-600 font-semibold hover:text-blue-800">Voir tout →</a>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Service Card -->
+                <a href="artisans.html" class="block group">
+                    <div
+                        class="bg-gray-50 rounded-xl p-6 text-center hover:bg-blue-50 transition border border-gray-100">
+                        <i data-lucide="droplet" class="w-10 h-10 text-blue-600 mx-auto mb-4"></i>
+                        <h3 class="font-bold text-gray-900">Plomberie</h3>
+                        <p class="text-sm text-gray-500 mt-1">Fuites, débouchage...</p>
+                    </div>
+                </a>
+                <!-- Service Card -->
+                <a href="artisans.html" class="block group">
+                    <div
+                        class="bg-gray-50 rounded-xl p-6 text-center hover:bg-blue-50 transition border border-gray-100">
+                        <i data-lucide="zap" class="w-10 h-10 text-blue-600 mx-auto mb-4"></i>
+                        <h3 class="font-bold text-gray-900">Électricité</h3>
+                        <p class="text-sm text-gray-500 mt-1">Pannes, installations...</p>
+                    </div>
+                </a>
+                <!-- Service Card -->
+                <a href="artisans.html" class="block group">
+                    <div
+                        class="bg-gray-50 rounded-xl p-6 text-center hover:bg-blue-50 transition border border-gray-100">
+                        <i data-lucide="paint-bucket" class="w-10 h-10 text-blue-600 mx-auto mb-4"></i>
+                        <h3 class="font-bold text-gray-900">Peinture</h3>
+                        <p class="text-sm text-gray-500 mt-1">Murs, plafonds...</p>
+                    </div>
+                </a>
+                <!-- Service Card -->
+                <a href="artisans.html" class="block group">
+                    <div
+                        class="bg-gray-50 rounded-xl p-6 text-center hover:bg-blue-50 transition border border-gray-100">
+                        <i data-lucide="hammer" class="w-10 h-10 text-blue-600 mx-auto mb-4"></i>
+                        <h3 class="font-bold text-gray-900">Bricolage</h3>
+                        <p class="text-sm text-gray-500 mt-1">Montage, réparation...</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="bg-blue-600 py-16">
+        <div class="max-w-4xl mx-auto px-4 text-center text-white">
+            <h2 class="text-3xl font-bold mb-4">Vous êtes un professionnel ?</h2>
+            <p class="text-blue-100 mb-8 text-lg">Rejoignez notre réseau de plus de 500 artisans qualifiés et développez
+                votre clientèle.</p>
+            <a href="signup.html?role=pro"
+                class="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition shadow-lg">
+                Devenir Partenaire
+            </a>
+        </div>
+    </div>
+
+    <!-- Floating Chat Button -->
+    <a href="chat.html"
+        class="fixed bottom-6 right-6 bg-primary text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-50 group flex items-center gap-2 pr-6">
+        <i data-lucide="message-circle" class="w-6 h-6"></i>
+        <span class="font-bold hidden group-hover:block transition-all">Dr. ProMaallem</span>
+        <span class="absolute -top-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></span>
+    </a>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-1">
+                <img src="logo-promaallem.png" alt="ProMaallem" class="h-10 w-auto mb-4">
+                <p class="text-sm">La plateforme de référence pour tous vos travaux à domicile au Maroc.</p>
+                <div class="flex items-center gap-4 mt-6">
+                    <a href="https://facebook.com/ProMaallem" class="text-gray-400 hover:text-white transition-colors">
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://instagram.com/promaallem" class="text-gray-400 hover:text-white transition-colors">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://linkedin.com/company/promaallem"
+                        class="text-gray-400 hover:text-white transition-colors">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Liens Utiles</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="about.html" class="hover:text-white">Qui sommes-nous</a></li>
+                    <li><a href="#" class="hover:text-white">Comment ça marche</a></li>
+                    <li><a href="#" class="hover:text-white">Tarifs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Légal</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-white">Conditions Générales</a></li>
+                    <li><a href="#" class="hover:text-white">Politique de confidentialité</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Contact</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><i data-lucide="mail" class="inline w-4 h-4 mr-2"></i> contact@promaallem.ma</li>
+                    <li><i data-lucide="phone" class="inline w-4 h-4 mr-2"></i> +212 5 22 00 00 00</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/smart-search.js"></script>
+    <script>
+        lucide.createIcons();
+
+        function triggerEmergency(issue, category) {
+            const searchInput = document.querySelector('input[name="q"]');
+
+            // Visual Feedback
+            searchInput.value = `URGENCE : ${issue}`;
+            searchInput.classList.add('ring-4', 'ring-red-500', 'bg-red-50');
+
+            // Show Loading Banner (Simulation)
+            const banner = document.createElement('div');
+            banner.className = 'fixed top-0 left-0 w-full bg-red-600 text-white text-center py-3 z-[60] font-bold shadow-lg transform translate-y-[-100%] transition-transform duration-300';
+            banner.innerHTML = `
+                <div class="flex items-center justify-center gap-2">
+                    <span class="animate-spin">⌛</span>
+                    Recherche du Maallem le plus proche disponible immédiatement...
+                </div>
+            `;
+            document.body.appendChild(banner);
+
+            // Animate Banner In
+            setTimeout(() => {
+                banner.classList.remove('translate-y-[-100%]');
+            }, 10);
+
+            // Redirect after 1.5s
+            setTimeout(() => {
+                window.location.href = `artisans.html?q=${encodeURIComponent(issue)}&urgency=true&category=${category}`;
+            }, 1500);
+        }
+    </script>
+</body>
+
+</html>

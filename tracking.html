@@ -1,0 +1,208 @@
+<section id="avis" class="py-20 bg-bg-light">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+            <div class="text-center md:text-left">
+                <h2 class="text-3xl md:text-4xl font-poppins font-bold text-primary mb-4">Ce que disent nos clients</h2>
+                <p class="text-text-muted">Plus de 1 000 interventions réussies chaque mois au Maroc.</p>
+            </div>
+            <div class="flex items-center gap-2 bg-white px-6 py-3 rounded-2xl shadow-sm border border-gray-100">
+                <span class="text-2xl font-bold text-primary">4.9/5</span>
+                <div class="flex text-yellow-400">
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-50 flex flex-col h-full">
+                <div class="flex gap-1 text-yellow-400 mb-4">
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                </div>
+                <p class="text-text-dark italic mb-6 flex-1">"Service impeccable pour une fuite d'eau urgente un dimanche à Casablanca. Le Maallem est arrivé en 30 minutes, prix annoncé respecté. Je recommande !"</p>
+                <div class="flex items-center gap-4 border-t pt-6">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center font-bold text-primary">KA</div>
+                    <div>
+                        <h4 class="font-bold text-sm">Karim A.</h4>
+                        <p class="text-xs text-text-muted">Casablanca • Plomberie</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-50 flex flex-col h-full">
+                <div class="flex gap-1 text-yellow-400 mb-4">
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                </div>
+                <p class="text-text-dark italic mb-6 flex-1">"Enfin une plateforme sérieuse. J'ai fait refaire toute la peinture de mon salon. Travail propre, artisan poli et surtout ponctuel."</p>
+                <div class="flex items-center gap-4 border-t pt-6">
+                    <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center font-bold text-accent">SB</div>
+                    <div>
+                        <h4 class="font-bold text-sm">Sanaa B.</h4>
+                        <p class="text-xs text-text-muted">Rabat • Peinture</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-50 flex flex-col h-full">
+                <div class="flex gap-1 text-yellow-400 mb-4">
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                </div>
+                <p class="text-text-dark italic mb-6 flex-1">"Installation de climatisation parfaite. Le certificat de garantie digital m'a été envoyé par SMS immédiatement après le paiement. Très pro."</p>
+                <div class="flex items-center gap-4 border-t pt-6">
+                    <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center font-bold text-primary">YM</div>
+                    <div>
+                        <h4 class="font-bold text-sm">Yassine M.</h4>
+                        <p class="text-xs text-text-muted">Casablanca • Climatisation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="booking-modal" class="fixed inset-0 z-[100] hidden">
+    <div class="absolute inset-0 bg-primary/40 backdrop-blur-md opacity-0 transition-opacity duration-300" id="modal-backdrop"></div>
+    
+    <div class="absolute bottom-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:max-w-lg bg-white rounded-t-[2.5rem] md:rounded-[2rem] shadow-2xl overflow-hidden transform translate-y-full md:scale-95 transition-transform duration-300" id="modal-container">
+        <button id="close-modal" class="absolute top-6 right-6 w-10 h-10 bg-bg-light rounded-full flex items-center justify-center text-primary hover:bg-gray-200 transition-colors z-10">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+
+        <div class="p-8 md:p-10">
+            <div class="mb-8">
+                <h3 class="text-2xl font-poppins font-bold text-primary mb-2">Réserver votre Maallem</h3>
+                <p class="text-text-muted text-sm">Obtenez une intervention rapide en quelques clics.</p>
+            </div>
+
+            <form id="booking-form" class="space-y-5">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-text-muted mb-2">Quel service ?</label>
+                    <select class="w-full bg-bg-light border-none rounded-xl px-4 py-4 text-sm font-medium focus:ring-2 focus:ring-accent transition-all appearance-none cursor-pointer">
+                        <option value="">Sélectionnez un service</option>
+                        <option value="plomberie">Plomberie (Fuite, Robinet...)</option>
+                        <option value="electricite">Électricité (Panne, Tableau...)</option>
+                        <option value="clim">Climatisation (Recharge, Nettoyage...)</option>
+                        <option value="peinture">Peinture & Rénovation</option>
+                        <option value="serrurerie">Serrurerie & Portes</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-text-muted mb-2">Ville</label>
+                        <select class="w-full bg-bg-light border-none rounded-xl px-4 py-4 text-sm font-medium focus:ring-2 focus:ring-accent transition-all">
+                            <option>Casablanca</option>
+                            <option>Rabat</option>
+                            <option>Mohammedia</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-text-muted mb-2">Téléphone</label>
+                        <input type="tel" placeholder="06..." class="w-full bg-bg-light border-none rounded-xl px-4 py-4 text-sm font-medium focus:ring-2 focus:ring-accent transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-text-muted mb-2">Urgence</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="urgency" class="hidden peer" checked>
+                            <div class="bg-bg-light p-3 rounded-xl text-center text-sm font-bold text-text-muted peer-checked:bg-primary peer-checked:text-white transition-all italic flex items-center justify-center gap-2">
+                                ASAP <i data-lucide="zap" class="w-4 h-4"></i>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="urgency" class="hidden peer">
+                            <div class="bg-bg-light p-3 rounded-xl text-center text-sm font-bold text-text-muted peer-checked:bg-primary peer-checked:text-white transition-all flex items-center justify-center gap-2">
+                                Planifié <i data-lucide="calendar" class="w-4 h-4"></i>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="bg-orange-50 p-4 rounded-xl border border-orange-100 flex items-start gap-3">
+                    <i data-lucide="info" class="w-5 h-5 text-accent shrink-0"></i>
+                    <p class="text-[11px] text-orange-900 leading-tight">
+                        <strong>Estimation :</strong> Le prix final sera confirmé après diagnostic gratuit sur place. Nos tarifs sont fixes et réglementés.
+                    </p>
+                </div>
+
+                <button type="submit" class="w-full bg-accent text-white py-5 rounded-2xl font-bold text-lg hover:shadow-xl hover:shadow-accent/30 transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                    Confirmer ma demande
+                    <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Modal Logic
+    const modal = document.getElementById('booking-modal');
+    const modalContainer = document.getElementById('modal-container');
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const openBtn = document.querySelector('button.group.bg-accent'); // Bouton Hero
+    const closeBtn = document.getElementById('close-modal');
+
+    const openModal = () => {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Lock scroll
+        setTimeout(() => {
+            modalBackdrop.classList.replace('opacity-0', 'opacity-100');
+            modalContainer.classList.replace('translate-y-full', 'translate-y-0');
+            modalContainer.classList.replace('md:scale-95', 'md:scale-100');
+        }, 10);
+    };
+
+    const closeModal = () => {
+        modalBackdrop.classList.replace('opacity-100', 'opacity-0');
+        modalContainer.classList.replace('translate-y-0', 'translate-y-full');
+        modalContainer.classList.replace('md:scale-100', 'md:scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }, 300);
+    };
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
+
+    // Form Handling
+    document.getElementById('booking-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        btn.innerHTML = 'Envoi en cours... <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>';
+        lucide.createIcons();
+        
+        // Simuler un envoi
+        setTimeout(() => {
+            btn.innerHTML = 'Demande envoyée ! ✅';
+            btn.classList.replace('bg-accent', 'bg-green-500');
+            setTimeout(() => {
+                closeModal();
+                // Reset form
+                setTimeout(() => {
+                    btn.innerHTML = 'Confirmer ma demande <i data-lucide="check-circle-2" class="w-5 h-5"></i>';
+                    btn.classList.replace('bg-green-500', 'bg-accent');
+                    lucide.createIcons();
+                }, 1000);
+            }, 1500);
+        }, 1500);
+    });
+</script>

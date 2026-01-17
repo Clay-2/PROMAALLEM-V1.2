@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demande Reçue ! | ProMaallem</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Montserrat:wght@600;700&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1A2B48', // Bleu Marine
+                        accent: '#C62828', // Rouge Royal
+                        'text-body': '#000000',
+                        'bg-light': '#F7FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                        title: ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 2s infinite',
+                        'check-stroke': 'stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #C62828;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            margin: 0 auto;
+            box-shadow: inset 0px 0px 0px #C62828;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes scale {
+
+            0%,
+            100% {
+                transform: none;
+            }
+
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 50px #C62828;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans text-text-body bg-bg-light min-h-screen flex items-center justify-center p-6">
+
+    <div
+        class="max-w-xl w-full bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 p-8 md:p-12 text-center">
+
+        <!-- Animated Checkmark -->
+        <div class="mb-8">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+            </svg>
+        </div>
+
+        <h1 data-i18n="success-title" class="text-3xl md:text-4xl font-bold font-title text-primary mb-4">Demande Reçue
+            !</h1>
+        <p data-i18n="success-desc" class="text-gray-500 mb-10 text-lg leading-relaxed">
+            Merci de votre confiance. Un Maallem expert vous contactera dans les <span class="font-bold text-primary">30
+                prochaines minutes</span> pour confirmer les détails.
+        </p>
+
+        <!-- Progress Steps -->
+        <div class="relative py-4 mb-10">
+            <div class="absolute top-1/2 left-0 w-full h-1 bg-gray-100 -z-10 rounded-full"></div>
+            <div class="flex justify-between w-full max-w-sm mx-auto">
+                <!-- Step 1 -->
+                <div class="flex flex-col items-center gap-2">
+                    <div
+                        class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center shadow-lg transform scale-110">
+                        <i data-lucide="check" class="w-4 h-4"></i>
+                    </div>
+                    <span data-i18n="success-step-1"
+                        class="text-[10px] font-bold uppercase tracking-wide text-green-600 bg-white px-1">Envoyée</span>
+                </div>
+                <!-- Line Active -->
+                <div class="absolute top-1/2 left-0 w-1/2 h-1 bg-green-500 -z-10 rounded-full"></div>
+
+                <!-- Step 2 -->
+                <div class="flex flex-col items-center gap-2">
+                    <div
+                        class="w-8 h-8 rounded-full bg-white border-2 border-accent text-accent flex items-center justify-center shadow-lg animate-pulse">
+                        <span class="text-xs font-bold">2</span>
+                    </div>
+                    <span data-i18n="success-step-2"
+                        class="text-[10px] font-bold uppercase tracking-wide text-accent bg-white px-1">Confirmation</span>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex flex-col items-center gap-2">
+                    <div
+                        class="w-8 h-8 rounded-full bg-white border-2 border-gray-200 text-gray-400 flex items-center justify-center">
+                        <span class="text-xs font-bold">3</span>
+                    </div>
+                    <span data-i18n="success-step-3"
+                        class="text-[10px] font-bold uppercase tracking-wide text-gray-400 bg-white px-1">Intervention</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <a href="index.html" data-i18n="payment-success-return"
+            class="block w-full bg-accent text-white py-4 rounded-xl font-bold text-lg hover:bg-[#b02222] transition-colors shadow-lg shadow-accent/20 mb-6">
+            Retour à l'accueil
+        </a>
+
+        <a href="tel:212600000000"
+            class="inline-flex items-center gap-2 text-primary font-bold hover:underline transition-all">
+            <i data-lucide="phone" class="w-4 h-4"></i>
+            <span data-i18n="success-support">Besoin d'aide ? Appelez-nous</span>
+        </a>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="js/i18n.js"></script>
+</body>
+
+</html>

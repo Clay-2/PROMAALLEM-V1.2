@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr" class="bg-gray-50">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Réservations | ProMaallem</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cooper+Hewitt:wght@700&family=Canva+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4361EE', // Royal Blue
+                        secondary: '#03045E', // Night Blue
+                        accent: '#0A9396', // Teal
+                        'card-dark': '#274C77', // Slate Blue for Dark Mode
+                        'text-muted': '#94A3B8',
+                    },
+                    fontFamily: {
+                        sans: ['Canva Sans', 'Inter', 'sans-serif'],
+                        title: ['Cooper Hewitt', 'Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-sans text-slate-900 dark:text-white bg-gray-50 dark:bg-[#03045E] transition-colors duration-300">
+
+    <!-- Navbar (Simplified) -->
+    <nav
+        class="bg-white/90 dark:bg-[#03045E]/90 backdrop-blur-md border-b border-gray-100 dark:border-white/5 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <img src="logo-promaallem.png" alt="ProMaallem"
+                    class="h-10 w-auto object-contain dark:brightness-0 dark:invert">
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="index.html"
+                    class="text-sm font-bold text-secondary dark:text-white hover:text-primary transition-colors">Accueil</a>
+                <div
+                    class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-secondary font-bold">
+                    MK</div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+
+        <!-- Header -->
+        <div class="mb-12">
+            <h1 class="text-4xl font-title font-bold text-secondary dark:text-white mb-2">Mes Réservations</h1>
+            <p class="text-text-muted text-lg">Vous avez <span class="font-bold text-primary">2 interventions</span> en
+                cours.</p>
+        </div>
+
+        <!-- Reservations Grid -->
+        <div class="grid lg:grid-cols-2 gap-8 mb-16">
+
+            <!-- Card 1: En Cours -->
+            <div
+                class="bg-white dark:bg-card-dark rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-white/5 flex flex-col sm:flex-row gap-6 relative overflow-hidden group hover:shadow-lg transition-all">
+                <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+
+                <!-- Photo -->
+                <div class="shrink-0 relative">
+                    <img src="https://images.unsplash.com/photo-1542596594-649edbc13630?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80"
+                        alt="Ahmed" class="w-24 h-24 rounded-2xl object-cover shadow-md">
+                    <div
+                        class="absolute -bottom-2 -right-2 bg-accent text-white p-1 rounded-full border-2 border-white dark:border-card-dark">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    </div>
+                </div>
+
+                <!-- Info -->
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h3 class="font-title font-bold text-xl text-secondary dark:text-white">Ahmed El Mansouri
+                            </h3>
+                            <p class="text-sm text-text-muted font-medium uppercase tracking-wider">Plomberie</p>
+                        </div>
+                        <span id="status-101"
+                            class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wide">
+                            En cours
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mt-4 text-sm">
+                        <div class="flex items-center gap-2 text-slate-600 dark:text-blue-100">
+                            <i data-lucide="calendar" class="w-4 h-4 text-primary"></i>
+                            <span class="font-medium">14 Jan. 2026</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-slate-600 dark:text-blue-100">
+                            <i data-lucide="clock" class="w-4 h-4 text-primary"></i>
+                            <span class="font-medium">10:00</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex items-center justify-between">
+                        <span class="text-lg font-bold text-secondary dark:text-white">150 DH <span
+                                class="text-xs font-normal text-text-muted">/ Estimat.</span></span>
+                        <div class="flex gap-2">
+                            <a href="chat-maallem.html"
+                                class="p-2 text-gray-400 hover:text-primary transition-colors hover:bg-gray-50 rounded-lg">
+                                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                            </a>
+                            <!-- Simulation Button -->
+                            <button onclick="finaliserEtFacturer(101, this)"
+                                class="px-4 py-2 bg-gray-100 hover:bg-green-100 text-gray-600 hover:text-green-700 rounded-lg text-xs font-bold transition-colors">
+                                Simuler Fin
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Confirmé -->
+            <div
+                class="bg-white dark:bg-card-dark rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-white/5 flex flex-col sm:flex-row gap-6 relative overflow-hidden group hover:shadow-lg transition-all">
+                <div class="absolute top-0 left-0 w-1 h-full bg-green-500"></div>
+
+                <!-- Photo -->
+                <div class="shrink-0 relative">
+                    <img src="https://images.unsplash.com/photo-1540569014015-19a7be504e3a?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80"
+                        alt="Youssef" class="w-24 h-24 rounded-2xl object-cover shadow-md">
+                    <div
+                        class="absolute -bottom-2 -right-2 bg-accent text-white p-1 rounded-full border-2 border-white dark:border-card-dark">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i>
+                    </div>
+                </div>
+
+                <!-- Info -->
+                <div class="flex-1">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h3 class="font-title font-bold text-xl text-secondary dark:text-white">Youssef Bennani</h3>
+                            <p class="text-sm text-text-muted font-medium uppercase tracking-wider">Électricité</p>
+                        </div>
+                        <span id="status-102"
+                            class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold uppercase tracking-wide">
+                            Confirmé
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mt-4 text-sm">
+                        <div class="flex items-center gap-2 text-slate-600 dark:text-blue-100">
+                            <i data-lucide="calendar" class="w-4 h-4 text-primary"></i>
+                            <span class="font-medium">15 Jan. 2026</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-slate-600 dark:text-blue-100">
+                            <i data-lucide="clock" class="w-4 h-4 text-primary"></i>
+                            <span class="font-medium">14:30</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 flex items-center justify-between">
+                        <span class="text-lg font-bold text-secondary dark:text-white">A définir</span>
+                        <div class="flex gap-2">
+                            <a href="chat-maallem.html"
+                                class="p-2 text-gray-400 hover:text-primary transition-colors hover:bg-gray-50 rounded-lg">
+                                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                            </a>
+                            <button onclick="finaliserEtFacturer(102, this)"
+                                class="px-4 py-2 bg-gray-100 hover:bg-green-100 text-gray-600 hover:text-green-700 rounded-lg text-xs font-bold transition-colors">
+                                Simuler Fin
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Payment History -->
+        <div
+            class="bg-white dark:bg-card-dark rounded-3xl shadow-sm border border-gray-100 dark:border-white/5 overflow-hidden">
+            <div class="p-8 border-b border-gray-100 dark:border-white/5 flex justify-between items-center">
+                <h2 class="text-2xl font-title font-bold text-secondary dark:text-white">Historique des Paiements</h2>
+                <button
+                    class="text-primary hover:text-secondary text-sm font-bold flex items-center gap-1 transition-colors">
+                    Tout voir <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead
+                        class="bg-gray-50 dark:bg-white/5 text-xs text-text-muted uppercase tracking-wider font-bold">
+                        <tr>
+                            <th class="px-8 py-4">Service</th>
+                            <th class="px-8 py-4">Date</th>
+                            <th class="px-8 py-4">Montant Payé</th>
+                            <th class="px-8 py-4 text-right">Facture</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 dark:divide-white/5">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                            <td class="px-8 py-6">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-primary">
+                                        <i data-lucide="droplet" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-secondary dark:text-white">Réparation Fuite</p>
+                                        <p class="text-xs text-text-muted">Ahmed El Mansouri</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-8 py-6 text-sm font-medium text-slate-600 dark:text-gray-300">10 Jan. 2026
+                            </td>
+                            <td class="px-8 py-6 text-sm font-bold text-secondary dark:text-white">350.00 DH</td>
+                            <td class="px-8 py-6 text-right">
+                                <a href="invoice.html" target="_blank"
+                                    class="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline">
+                                    <i data-lucide="download" class="w-4 h-4"></i> Télécharger
+                                </a>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                            <td class="px-8 py-6">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center text-purple-600">
+                                        <i data-lucide="paint-bucket" class="w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-secondary dark:text-white">Peinture Salon</p>
+                                        <p class="text-xs text-text-muted">Karima Alami</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-8 py-6 text-sm font-medium text-slate-600 dark:text-gray-300">05 Dec. 2025
+                            </td>
+                            <td class="px-8 py-6 text-sm font-bold text-secondary dark:text-white">1,200.00 DH</td>
+                            <td class="px-8 py-6 text-right">
+                                <a href="invoice.html"
+                                    class="inline-flex items-center gap-2 text-primary font-bold text-sm hover:underline">
+                                    <i data-lucide="download" class="w-4 h-4"></i> Télécharger
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Review Modal -->
+    <div id="review-modal" class="fixed inset-0 z-[110] hidden">
+        <div class="absolute inset-0 bg-secondary/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+            id="review-backdrop"></div>
+
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-3xl shadow-2xl p-8 transform scale-90 opacity-0 transition-all duration-300 relative"
+            id="review-container">
+
+            <button onclick="closeReviewModal()"
+                class="absolute top-4 right-4 text-gray-300 hover:text-gray-500 transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <h3 class="font-title font-bold text-2xl text-secondary mb-2">Votre avis compte !</h3>
+                <p class="text-text-muted text-sm">Aidez la communauté en notant l'intervention.</p>
+            </div>
+
+            <!-- Stars -->
+            <div class="flex justify-center gap-2 mb-8" id="stars-container">
+                <button class="star-btn transition-transform hover:scale-110" data-value="1"><i data-lucide="star"
+                        class="w-8 h-8 text-gray-200 fill-current"></i></button>
+                <button class="star-btn transition-transform hover:scale-110" data-value="2"><i data-lucide="star"
+                        class="w-8 h-8 text-gray-200 fill-current"></i></button>
+                <button class="star-btn transition-transform hover:scale-110" data-value="3"><i data-lucide="star"
+                        class="w-8 h-8 text-gray-200 fill-current"></i></button>
+                <button class="star-btn transition-transform hover:scale-110" data-value="4"><i data-lucide="star"
+                        class="w-8 h-8 text-gray-200 fill-current"></i></button>
+                <button class="star-btn transition-transform hover:scale-110" data-value="5"><i data-lucide="star"
+                        class="w-8 h-8 text-gray-200 fill-current"></i></button>
+            </div>
+
+            <!-- Badges -->
+            <div class="flex flex-wrap justify-center gap-2 mb-6">
+                <button
+                    class="badge-btn px-3 py-1.5 rounded-full border border-gray-200 text-xs font-bold text-gray-500 hover:border-accent hover:text-accent transition-all"
+                    data-badge="Ponctuel">Ponctuel</button>
+                <button
+                    class="badge-btn px-3 py-1.5 rounded-full border border-gray-200 text-xs font-bold text-gray-500 hover:border-accent hover:text-accent transition-all"
+                    data-badge="Propre">Propre</button>
+                <button
+                    class="badge-btn px-3 py-1.5 rounded-full border border-gray-200 text-xs font-bold text-gray-500 hover:border-accent hover:text-accent transition-all"
+                    data-badge="Professionnel">Professionnel</button>
+                <button
+                    class="badge-btn px-3 py-1.5 rounded-full border border-gray-200 text-xs font-bold text-gray-500 hover:border-accent hover:text-accent transition-all"
+                    data-badge="Sympa">Sympa</button>
+            </div>
+
+            <!-- Comment -->
+            <textarea id="review-comment"
+                class="w-full bg-gray-50 rounded-xl border-none p-4 text-sm focus:ring-2 focus:ring-primary mb-6 resize-none"
+                rows="3" placeholder="Dites-nous ce que vous avez pensé de l'intervention..."></textarea>
+
+            <!-- Submit -->
+            <button onclick="submitReview()" id="submit-review-btn"
+                class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-lg hover:bg-blue-600 transition-all flex items-center justify-center gap-2">
+                Publier mon avis <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

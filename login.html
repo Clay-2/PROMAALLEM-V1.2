@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion | ProMaallem</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;500;600&family=Poppins:wght@600;700&family=Montserrat:wght@600;700&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4361EE', // Bleu Royal
+                        secondary: '#03045E', // Bleu Nuit
+                        accent: '#F72585',
+                        'bleu-nuit': '#03045E',
+                        'bleu-royal': '#4361EE',
+                        'bg-light': '#FFFFFF',
+                        'text-dark': '#03045E',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        cooper: ['Montserrat', 'sans-serif'],
+                        title: ['Montserrat', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                        'floating': '0 10px 40px -10px rgba(0,0,0,0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="h-full bg-white font-sans text-slate-900 overflow-hidden">
+
+    <div class="flex h-full w-full">
+        <!-- Left Side - Visual / Branding -->
+        <div
+            class="hidden lg:flex w-1/2 bg-bleu-nuit relative flex-col justify-between p-12 overflow-hidden text-white">
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 z-0 select-none pointer-events-none">
+                <img src="https://images.unsplash.com/photo-1581578731117-104f2a863b17?auto=format&fit=crop&q=80&w=2000"
+                    class="w-full h-full object-cover opacity-40 mix-blend-overlay">
+                <div class="absolute inset-0 bg-gradient-to-br from-bleu-nuit/90 via-bleu-nuit/60 to-primary/40"></div>
+            </div>
+
+            <!-- Content -->
+            <div class="relative z-10 select-none">
+                <a href="index.html" class="inline-block mb-10">
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="text-3xl font-extrabold font-title tracking-tight text-white pointer-events-none">ProMaallem</span>
+                        <div class="w-2 h-2 rounded-full bg-accent animate-pulse"></div>
+                    </div>
+                </a>
+
+                <div class="max-w-md">
+                    <h2 class="text-5xl font-bold font-title leading-tight mb-6">L'excellence à votre service.</h2>
+                    <p class="text-lg text-blue-100/90 leading-relaxed font-light">
+                        Rejoignez la plus grande communauté de professionnels qualifiés au Maroc. Trouvez de l'aide ou
+                        proposez vos services en quelques clics.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Footer Quote/Stats -->
+            <div class="relative z-10 flex items-center gap-4">
+                <div class="flex -space-x-3">
+                    <img class="w-10 h-10 rounded-full border-2 border-bleu-nuit" src="https://i.pravatar.cc/100?img=1"
+                        alt="">
+                    <img class="w-10 h-10 rounded-full border-2 border-bleu-nuit" src="https://i.pravatar.cc/100?img=5"
+                        alt="">
+                    <img class="w-10 h-10 rounded-full border-2 border-bleu-nuit" src="https://i.pravatar.cc/100?img=8"
+                        alt="">
+                </div>
+                <div class="flex flex-col">
+                    <div class="flex items-center text-yellow-400 gap-0.5">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <span class="text-sm font-medium text-white/80">Recommandé par +2000 utilisateurs</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Form -->
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12 lg:p-24 overflow-y-auto">
+            <div class="w-full max-w-[440px] space-y-8 animate-fade-in-up">
+
+                <!-- Mobile Logo (Visible only on small screens) -->
+                <div class="lg:hidden text-center mb-6">
+                    <a href="index.html"
+                        class="inline-block text-2xl font-extrabold text-primary font-title">ProMaallem</a>
+                </div>
+
+                <div class="text-center md:text-left">
+                    <h1 class="text-3xl md:text-4xl font-bold text-bleu-nuit mb-3 font-title">Bon retour !</h1>
+                    <p class="text-slate-500 text-lg">Entrez vos identifiants pour accéder à votre espace.</p>
+                </div>
+
+                <!-- Role Selector -->
+                <div class="flex p-1.5 bg-gray-50 border border-gray-100 rounded-2xl">
+                    <button
+                        class="flex-1 py-3.5 text-sm font-bold rounded-xl bg-white text-bleu-nuit shadow-sm border border-gray-100 transition-all transform hover:-translate-y-0.5"
+                        id="role-client">Je suis Client</button>
+                    <button
+                        class="flex-1 py-3.5 text-sm font-bold rounded-xl text-gray-500 hover:text-bleu-nuit transition-all"
+                        id="role-maallem">Je suis Maallem</button>
+                </div>
+
+                <!-- Priority Google Login Button -->
+                <div class="space-y-4">
+                    <!-- Google Identity Services Configuration (Hidden) -->
+                    <!-- IMPORTANT: Replace 'YOUR_GOOGLE_CLIENT_ID' with your actual Cloud Console Client ID -->
+                    <div id="g_id_onload" data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                        data-callback="handleCredentialResponse" data-auto_prompt="false">
+                    </div>
+
+                    <!-- Custom Implementation: Large White Button with Border -->
+                    <button onclick="googleLogin()"
+                        class="w-full relative flex items-center justify-center gap-3 py-4 bg-white border-2 border-gray-200 rounded-2xl hover:bg-gray-50 hover:border-gray-300 transition-all group shadow-sm">
+                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 absolute left-6"
+                            alt="Google">
+                        <span class="text-slate-700 font-sans font-bold text-lg">Continuer avec Google</span>
+                    </button>
+                </div>
+
+                <!-- Divider -->
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-200"></div>
+                    </div>
+                    <div class="relative flex justify-center text-xs uppercase">
+                        <span class="bg-white px-4 text-slate-400 font-bold tracking-wider">Ou avec email</span>
+                    </div>
+                </div>
+
+                <!-- Email Form -->
+                <form action="dashboard.html" class="space-y-5">
+                    <div class="space-y-2">
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Adresse
+                            E-mail</label>
+                        <div class="relative group">
+                            <i data-lucide="mail"
+                                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors"></i>
+                            <input type="email" placeholder="nom@exemple.com" required
+                                class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-transparent hover:bg-white hover:border-gray-200 focus:bg-white focus:border-primary focus:ring-0 rounded-2xl transition-all font-medium text-slate-800 placeholder-slate-400">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider">Mot de
+                                passe</label>
+                            <a href="#" class="text-xs font-bold text-primary hover:underline">Oublié ?</a>
+                        </div>
+                        <div class="relative group">
+                            <i data-lucide="lock"
+                                class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors"></i>
+                            <input type="password" placeholder="••••••••" required
+                                class="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-transparent hover:bg-white hover:border-gray-200 focus:bg-white focus:border-primary focus:ring-0 rounded-2xl transition-all font-medium text-slate-800 placeholder-slate-400">
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-4 bg-primary hover:bg-blue-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-primary/30 transform active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-lg">
+                        Se connecter
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                </form>
+
+
+                <p class="text-center text-slate-500 font-medium pt-4">
+                    Pas encore de compte ?
+                    <a href="signup.html" class="text-primary font-bold hover:underline">S'inscrire</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Style for fade-in animation -->
+    <style>
+        .animate-fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <script>
+        lucide.createIcons();
+
+        // Role Toggle Logic
+        const clientBtn = document.getElementById('role-client');
+        const maallemBtn = document.getElementById('role-maallem');
+
+        function setRole(role) {
+            if (role === 'client') {
+                clientBtn.classList.add('bg-white', 'text-bleu-nuit', 'shadow-sm', 'border-gray-100');
+                clientBtn.classList.remove('text-gray-500', 'hover:text-bleu-nuit');
+
+                maallemBtn.classList.remove('bg-white', 'text-bleu-nuit', 'shadow-sm', 'border-gray-100');
+                maallemBtn.classList.add('text-gray-500', 'hover:text-bleu-nuit');
+            } else {
+                maallemBtn.classList.add('bg-white', 'text-bleu-nuit', 'shadow-sm', 'border-gray-100');
+                maallemBtn.classList.remove('text-gray-500', 'hover:text-bleu-nuit');
+
+                clientBtn.classList.remove('bg-white', 'text-bleu-nuit', 'shadow-sm', 'border-gray-100');
+                clientBtn.classList.add('text-gray-500', 'hover:text-bleu-nuit');
+            }
+        }
+
+        clientBtn.addEventListener('click', () => setRole('client'));
+        maallemBtn.addEventListener('click', () => setRole('maallem'));
+
+        // Google OAuth 2.0 Handler
+        function googleLogin() {
+            // Check if Google script is loaded
+            if (window.google && google.accounts && google.accounts.id) {
+                google.accounts.id.prompt(); // Show the One Tap or Popup
+            } else {
+                console.log('Google Identity Services not loaded yet.');
+            }
+        }
+
+        // Callback function to handle the response
+        function handleCredentialResponse(response) {
+            console.log("Encoded JWT ID token: " + response.credential);
+
+            // Here you would send this token to your backend to verify and retrieve user info
+            const responsePayload = decodeJwtResponse(response.credential);
+
+            console.log("ID: " + responsePayload.sub);
+            console.log('Full Name: ' + responsePayload.name);
+            console.log('Given Name: ' + responsePayload.given_name);
+            console.log('Family Name: ' + responsePayload.family_name);
+            console.log("Image URL: " + responsePayload.picture);
+            console.log("Email: " + responsePayload.email);
+
+            // Redirect or Auto-fill form
+            alert('Connexion Google réussie pour: ' + responsePayload.name);
+        }
+
+        // Helper to decode the JWT (for demonstration purposes)
+        function decodeJwtResponse(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            return JSON.parse(jsonPayload);
+        }
+    </script>
+</body>
+
+</html>

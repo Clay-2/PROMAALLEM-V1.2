@@ -1,0 +1,21 @@
+# Query: ProMaallem
+# ContextLines: 1
+
+4 results - 1 file
+
+C:\Users\HP ENVY\Desktop\promaallem\index.html:
+    5      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    6:     <title><img src="logo-promaallem.png" alt="ProMaallem" class="h-10 w-auto"> | Dépannage & Services à domicile au Maroc</title>
+    7      
+
+  306              <div class="max-w-xl">
+  307:                 <h2 class="text-3xl font-poppins font-bold text-primary mb-4">Ils font la fierté de ProMaallem</h2>
+  308                  <p class="text-text-muted">Nos Maallems sont sélectionnés parmi les meilleurs de chaque quartier.</p>
+
+  422                          <i data-lucide="mail" class="w-5 h-5 text-accent shrink-0"></i>
+  423:                         <span>automind@promaallem.ma</span>
+  424                      </li>
+
+  429          <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-text-muted font-medium">
+  430:             <p>© 2026 ProMaallem. Tous droits réservés.</p>
+  431              <div class="flex gap-6">

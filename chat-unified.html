@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Messagerie Unifiée | ProMaallem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="js/maallems_data.js"></script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Bubble Styles */
+        .bubble-ai {
+            background: linear-gradient(135deg, #6366f1 0%, #4361EE 100%);
+            color: white;
+            border-bottom-left-radius: 4px;
+        }
+
+        .bubble-pro {
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            color: #03045E;
+            border-bottom-left-radius: 4px;
+        }
+
+        .bubble-user {
+            background-color: #03045E;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        /* Tab Active State */
+        .tab-active {
+            color: #4361EE;
+            /* Text Royal Blue */
+            border-bottom: 2px solid #4361EE;
+        }
+
+        .tab-inactive {
+            color: #9CA3AF;
+            /* Text Gray 400 */
+            border-bottom: 2px solid transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 h-full flex flex-col overflow-hidden">
+
+    <!-- Header & Tabs -->
+    <header class="bg-white shadow-sm sticky top-0 z-20">
+        <!-- Top Bar -->
+        <div class="px-4 py-3 flex items-center justify-between border-b border-gray-100">
+            <a href="dashboard.html" class="p-2 -ml-2 text-gray-400 hover:text-gray-600">
+                <i data-lucide="arrow-left" class="w-6 h-6"></i>
+            </a>
+            <h1 class="font-bold text-lg text-night-blue">Dossier #4829</h1>
+            <button class="p-2 text-gray-400">
+                <i data-lucide="more-vertical" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- TABS -->
+        <div class="flex">
+            <button onclick="switchTab('ai')" id="tab-ai"
+                class="flex-1 py-3 text-sm font-bold flex items-center justify-center gap-2 tab-active transition-all">
+                <i data-lucide="bot" class="w-4 h-4"></i>
+                Diagnostic IA
+            </button>
+            <button onclick="switchTab('pro')" id="tab-pro"
+                class="flex-1 py-3 text-sm font-bold flex items-center justify-center gap-2 tab-inactive transition-all">
+                <i data-lucide="user" class="w-4 h-4"></i>
+                Discussion Pro
+            </button>
+        </div>
+    </header>
+
+    <!-- Content Area -->
+    <main class="flex-1 overflow-y-auto p-4 relative bg-slate-50" id="chat-content">
+
+        <!-- === AI PANEL === -->
+        <div id="ai-panel" class="space-y-6">
+            <div class="flex justify-center mb-4">
+                <span
+                    class="text-[10px] font-bold uppercase tracking-wider text-gray-400 bg-gray-100 px-3 py-1 rounded-full">Automatique</span>
+            </div>
+
+            <!-- AI Message -->
+            <div class="flex gap-3 max-w-[90%]">
+                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="bot" class="w-5 h-5 text-indigo-600"></i>
+                </div>
+                <div>
+                    <span class="text-[10px] font-bold text-indigo-600 mb-1 block">Dr. ProMaallem</span>
+                    <div class="bubble-ai p-4 rounded-2xl shadow-sm">
+                        <p class="text-sm leading-relaxed">
+                            Bonjour ! J'ai analysé votre demande. Il semble s'agir d'une <strong>fuite de
+                                siphon</strong> standard.<br><br>
+                            Estimation : <strong>150 - 200 DH</strong>.<br>
+                            Durée : ~30 min.
+                        </p>
+                    </div>
+                    <span class="text-[10px] text-gray-400 mt-1 ml-1">10:00</span>
+                </div>
+            </div>
+
+            <!-- User Message -->
+            <div class="flex gap-3 max-w-[90%] ml-auto flex-row-reverse">
+                <div class="bubble-user p-4 rounded-2xl shadow-sm">
+                    <p class="text-sm">D'accord, est-ce que c'est urgent ?</p>
+                </div>
+                <span class="text-[10px] text-gray-400 mt-auto mb-1">10:01</span>
+            </div>
+
+            <!-- AI Message -->
+            <div class="flex gap-3 max-w-[90%]">
+                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="bot" class="w-5 h-5 text-indigo-600"></i>
+                </div>
+                <div>
+                    <span class="text-[10px] font-bold text-indigo-600 mb-1 block">Dr. ProMaallem</span>
+                    <div class="bubble-ai p-4 rounded-2xl shadow-sm">
+                        <p class="text-sm leading-relaxed">
+                            Pas de danger immédiat si vous fermez l'arrivée d'eau. Je transfère votre dossier à un
+                            expert.
+                        </p>
+                    </div>
+                    <span class="text-[10px] text-gray-400 mt-1 ml-1">10:02</span>
+                </div>
+            </div>
+
+            <!-- HANDOFF COMPONENT (The Bridge) -->
+            <div class="my-8 relative">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-200"></div>
+                </div>
+                <div class="relative flex justify-center">
+                    <span
+                        class="bg-white px-4 py-2 rounded-full border border-gray-200 text-xs font-medium text-gray-500 shadow-sm flex items-center gap-2">
+                        <i data-lucide="arrow-down-circle" class="w-4 h-4 text-green-500"></i>
+                        Dossier transmis à Youssef
+                    </span>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button onclick="switchTab('pro')" class="text-xs font-bold text-indigo-600 underline">Voir la
+                    discussion avec l'artisan</button>
+            </div>
+        </div>
+
+        <!-- === PRO PANEL (Hidden by default) === -->
+        <div id="pro-panel" class="space-y-6 hidden">
+
+            <!-- Context Card -->
+            <div class="bg-blue-50 border border-blue-100 p-3 rounded-xl flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-blue-600">
+                    <i data-lucide="file-text" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <p class="text-xs font-bold text-blue-900">Résumé Diagnostic</p>
+                    <p class="text-[10px] text-blue-700">Fuite Siphon • Urgent • Max 200 DH</p>
+                </div>
+                <i data-lucide="check-circle" class="w-4 h-4 text-green-500 ml-auto"></i>
+            </div>
+
+            <!-- Pro Message -->
+            <div class="flex gap-3 max-w-[90%]">
+                <!-- Real Avatar -->
+                <div
+                    class="w-8 h-8 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden border border-white shadow-sm">
+                    <img src="images/artisans/artisan-1.jpg"
+                        onerror="this.src='https://images.unsplash.com/photo-1542596594-649edbc13630?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'"
+                        class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-[10px] font-bold text-gray-900">Youssef Plombier</span>
+                        <span
+                            class="text-[8px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-bold uppercase">En
+                            direct</span>
+                    </div>
+                    <div class="bubble-pro p-4 rounded-2xl shadow-sm">
+                        <p class="text-sm leading-relaxed">Salam ! J'ai bien reçu le diagnostic. Je suis dans le
+                            quartier, je peux passer dans 20 minutes.</p>
+                    </div>
+                    <span class="text-[10px] text-gray-400 mt-1 ml-1">10:05</span>
+                </div>
+            </div>
+
+            <!-- User Message -->
+            <div class="flex gap-3 max-w-[90%] ml-auto flex-row-reverse">
+                <div class="bubble-user p-4 rounded-2xl shadow-sm">
+                    <p class="text-sm">Super, ça m'arrange. C'est bien 200 DH max ?</p>
+                </div>
+                <span class="text-[10px] text-gray-400 mt-auto mb-1">10:06</span>
+            </div>
+
+            <!-- Pro Message -->
+            <div class="flex gap-3 max-w-[90%]">
+                <div
+                    class="w-8 h-8 rounded-full bg-gray-200 flex-shrink-0 overflow-hidden border border-white shadow-sm">
+                    <img src="images/artisans/artisan-1.jpg"
+                        onerror="this.src='https://images.unsplash.com/photo-1542596594-649edbc13630?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'"
+                        class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-[10px] font-bold text-gray-900">Youssef Plombier</span>
+                    </div>
+                    <div class="bubble-pro p-4 rounded-2xl shadow-sm">
+                        <p class="text-sm leading-relaxed">Oui, confirmé sur l'appli. Le prix est bloqué. J'arrive ! 🛵
+                        </p>
+                    </div>
+                    <span class="text-[10px] text-gray-400 mt-1 ml-1">10:07</span>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Unified Input -->
+    <footer class="bg-white border-t border-gray-200 p-3 pb-safe sticky bottom-0 z-20">
+        <form class="flex gap-2 items-end">
+            <button type="button" class="p-3 text-gray-400 hover:text-blue-600 bg-gray-50 rounded-xl transition">
+                <i data-lucide="plus" class="w-5 h-5"></i>
+            </button>
+            <div
+                class="flex-1 bg-gray-50 rounded-xl px-4 py-2 border border-transparent focus-within:border-blue-500 focus-within:bg-white transition">
+                <input type="text" id="msg-input" placeholder="Écrivez votre message..."
+                    class="w-full bg-transparent outline-none text-sm placeholder-gray-400 h-6">
+            </div>
+            <button type="submit"
+                class="p-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 shadow-lg transition transform active:scale-95">
+                <i data-lucide="send" class="w-5 h-5"></i>
+            </button>
+        </form>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const tabAi = document.getElementById('tab-ai');
+        const tabPro = document.getElementById('tab-pro');
+        const aiPanel = document.getElementById('ai-panel');
+        const proPanel = document.getElementById('pro-panel');
+
+        function switchTab(tab) {
+            if (tab === 'ai') {
+                // Activate AI Tab
+                tabAi.classList.add('tab-active');
+                tabAi.classList.remove('tab-inactive');
+                tabPro.classList.remove('tab-active');
+                tabPro.classList.add('tab-inactive');
+
+                // Show AI Panel
+                aiPanel.classList.remove('hidden');
+                proPanel.classList.add('hidden');
+            } else {
+                // Activate Pro Tab
+                tabPro.classList.add('tab-active');
+                tabPro.classList.remove('tab-inactive');
+                tabAi.classList.remove('tab-active');
+                tabAi.classList.add('tab-inactive');
+
+                // Show Pro Panel
+                proPanel.classList.remove('hidden');
+                aiPanel.classList.add('hidden');
+            }
+        }
+
+        // Auto-switch to Pro tab if redirected or param set (Optional enhancement)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('tab') === 'pro') {
+            switchTab('pro');
+        }
+    </script>
+</body>
+
+</html>

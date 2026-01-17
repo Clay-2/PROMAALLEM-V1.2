@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOS ProMaallem - Urgence Dépannage</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'urgence': '#EF4444',
+                        'urgence-dark': '#B91C1C',
+                        'bleu-nuit': '#03045E',
+                        'blanc': '#FFFFFF',
+                    },
+                    fontFamily: {
+                        'title': ['Montserrat', 'sans-serif'], // Cooper Hewitt proxy
+                        'body': ['Inter', 'sans-serif'],       // Canva Sans proxy
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .step-active {
+            border-color: #EF4444;
+            background-color: #FEF2F2;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-body antialiased min-h-screen flex flex-col">
+
+    <!-- Header Alert -->
+    <header class="bg-urgence text-white py-4 shadow-lg sticky top-0 z-50">
+        <div class="max-w-3xl mx-auto px-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-white/20 p-2 rounded-full animate-pulse-fast">
+                    <i data-lucide="siren" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <img src="logo-promaallem.png" alt="ProMaallem" class="h-8 w-auto brightness-0 invert">
+                    <p class="text-xs text-white/90 font-medium mt-1">Intervention en < 30 min</p>
+                </div>
+            </div>
+            <a href="index.html" class="text-sm font-medium underline text-white/80 hover:text-white">Annuler</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow py-8 px-4">
+        <div class="max-w-2xl mx-auto">
+
+            <!-- Progress Bar -->
+            <div class="flex items-center justify-between mb-8 px-2">
+                <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-urgence text-white flex items-center justify-center font-bold text-sm shadow-md transition-colors"
+                        id="step1-indicator">1</div>
+                    <span class="text-xs font-semibold text-urgence mt-1">Urgence</span>
+                </div>
+                <div class="h-1 flex-grow mx-2 bg-gray-200 rounded">
+                    <div class="h-full bg-urgence w-0 transition-all duration-300" id="progress-bar"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold text-sm transition-colors"
+                        id="step2-indicator">2</div>
+                    <span class="text-xs font-medium text-gray-400 mt-1">Lieu</span>
+                </div>
+                <div class="h-1 flex-grow mx-2 bg-gray-200 rounded"></div>
+                <div class="flex flex-col items-center">
+                    <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-400 flex items-center justify-center font-bold text-sm transition-colors"
+                        id="step3-indicator">3</div>
+                    <span class="text-xs font-medium text-gray-400 mt-1">Validation</span>
+                </div>
+            </div>
+
+            <!-- STEP 1: Type Selection -->
+            <div id="step-1" class="step-content">
+                <h2 class="font-title font-bold text-2xl text-bleu-nuit mb-2 text-center">Quel est votre problème ?</h2>
+                <p class="text-center text-gray-500 mb-8">Sélectionnez le type d'urgence pour une prise en charge
+                    immédiate.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <button onclick="selectUrgency('plomberie', 'Fuite d\'eau')"
+                        class="group relative bg-white border-2 border-gray-100 p-6 rounded-2xl hover:border-urgence shadow-sm hover:shadow-xl transition-all text-center h-48 flex flex-col items-center justify-center gap-4">
+                        <div
+                            class="w-16 h-16 bg-red-50 text-urgence rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="droplet" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <span
+                                class="block font-bold text-lg text-gray-800 group-hover:text-urgence">Plomberie</span>
+                            <span class="text-xs text-gray-400">Fuite, Canalisation...</span>
+                        </div>
+                        <div class="absolute top-3 right-3 w-3 h-3 bg-green-500 rounded-full border-2 border-white"
+                            title="Dispo"></div>
+                    </button>
+
+                    <button onclick="selectUrgency('electricite', 'Panne Électrique')"
+                        class="group relative bg-white border-2 border-gray-100 p-6 rounded-2xl hover:border-urgence shadow-sm hover:shadow-xl transition-all text-center h-48 flex flex-col items-center justify-center gap-4">
+                        <div
+                            class="w-16 h-16 bg-red-50 text-urgence rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="zap-off" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <span
+                                class="block font-bold text-lg text-gray-800 group-hover:text-urgence">Électricité</span>
+                            <span class="text-xs text-gray-400">Coupure, Court-circuit...</span>
+                        </div>
+                        <div class="absolute top-3 right-3 w-3 h-3 bg-green-500 rounded-full border-2 border-white"
+                            title="Dispo"></div>
+                    </button>
+
+                    <button onclick="selectUrgency('serrurerie', 'Porte Bloquée')"
+                        class="group relative bg-white border-2 border-gray-100 p-6 rounded-2xl hover:border-urgence shadow-sm hover:shadow-xl transition-all text-center h-48 flex flex-col items-center justify-center gap-4">
+                        <div
+                            class="w-16 h-16 bg-red-50 text-urgence rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="key" class="w-8 h-8"></i>
+                        </div>
+                        <div>
+                            <span
+                                class="block font-bold text-lg text-gray-800 group-hover:text-urgence">Serrurerie</span>
+                            <span class="text-xs text-gray-400">Porte claquée, Perte...</span>
+                        </div>
+                        <div class="absolute top-3 right-3 w-3 h-3 bg-orange-500 rounded-full border-2 border-white"
+                            title="Forte demande"></div>
+                    </button>
+                </div>
+
+                <!-- Price Transparency -->
+                <div class="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
+                    <i data-lucide="info" class="w-5 h-5 text-blue-600 shrink-0 mt-0.5"></i>
+                    <div>
+                        <h3 class="font-bold text-blue-900 text-sm">Tarif Urgence Appliqué</h3>
+                        <p class="text-xs text-blue-700 mt-1">Comprend le déplacement immédiat et la 1ère heure de main
+                            d'œuvre. Majoration de 20% incluse pour priorité absolue.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 2: Location -->
+            <div id="step-2" class="step-content hidden text-center">
+                <button onclick="goBack(1)"
+                    class="mb-6 text-gray-400 hover:text-gray-600 flex items-center justify-center gap-2 text-sm"><i
+                        data-lucide="arrow-left" class="w-4 h-4"></i> Retour</button>
+
+                <h2 class="font-title font-bold text-2xl text-bleu-nuit mb-2">Où doit-on intervenir ?</h2>
+                <p class="text-gray-500 mb-8">Le Maallem le plus proche sera notifié.</p>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 max-w-md mx-auto">
+                    <button id="geo-btn" onclick="useGeolocation()"
+                        class="w-full bg-blue-50 hover:bg-blue-100 text-blue-600 font-bold py-4 rounded-xl flex items-center justify-center gap-2 mb-4 transition-colors">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        Utiliser ma position actuelle
+                    </button>
+
+                    <div class="relative flex py-2 items-center">
+                        <div class="flex-grow border-t border-gray-100"></div>
+                        <span class="flex-shrink-0 mx-4 text-gray-300 text-xs">OU</span>
+                        <div class="flex-grow border-t border-gray-100"></div>
+                    </div>
+
+                    <div class="mt-4">
+                        <input type="text" id="manual-address" placeholder="Saisir adresse manuellement..."
+                            class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-urgence/20 focus:border-urgence transition-all">
+                    </div>
+
+                    <button onclick="goToStep3()"
+                        class="w-full bg-urgence hover:bg-urgence-dark text-white font-bold py-4 rounded-xl mt-6 shadow-lg shadow-red-200 transition-all">
+                        Valider l'adresse
+                    </button>
+                </div>
+            </div>
+
+            <!-- STEP 3: Searching / Validation -->
+            <div id="step-3" class="step-content hidden text-center pt-8">
+                <div class="relative w-32 h-32 mx-auto mb-8">
+                    <!-- Ripple Effect -->
+                    <span
+                        class="absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-20 animate-ping"></span>
+                    <div
+                        class="relative w-32 h-32 bg-white rounded-full flex items-center justify-center border-4 border-red-50 shadow-inner">
+                        <span class="text-4xl">🕵️</span>
+                    </div>
+                </div>
+
+                <h2 class="font-title font-bold text-2xl text-bleu-nuit mb-2">Recherche en cours...</h2>
+                <p class="text-gray-500 mb-6">Nous contactons les artisans autour de <span
+                        class="font-bold text-gray-800" id="display-address">votre position</span>.</p>
+
+                <div class="max-w-xs mx-auto bg-gray-100 rounded-full h-2 mb-8 overflow-hidden">
+                    <div class="h-full bg-urgence animate-[width_2s_ease-in-out_infinite]" style="width: 50%"></div>
+                </div>
+
+                <div class="bg-white border-l-4 border-urgence p-4 text-left max-w-md mx-auto rounded-r-xl shadow-sm">
+                    <p class="font-bold text-gray-800 text-sm">Ne quittez pas cette page</p>
+                    <p class="text-xs text-gray-500 mt-1">Un expert va accepter votre demande d'ici quelques secondes.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-6 text-center text-xs text-gray-400 border-t border-gray-100">
+        &copy; 2026 ProMaallem Urgence. <a href="#" class="underline">Conditions d'intervention</a>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        let selectedCategory = '';
+        let address = '';
+
+        function selectUrgency(category, label) {
+            selectedCategory = category;
+            // Visual feedback could be added here if we weren't jumping straight to next step
+            goToStep2();
+        }
+
+        function goToStep2() {
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+
+            // Update Indicators
+            document.getElementById('step2-indicator').classList.remove('bg-gray-200', 'text-gray-400');
+            document.getElementById('step2-indicator').classList.add('bg-urgence', 'text-white');
+            document.getElementById('progress-bar').classList.remove('w-0');
+            document.getElementById('progress-bar').classList.add('w-1/2');
+        }
+
+        function goBack(step) {
+            if (step === 1) {
+                document.getElementById('step-2').classList.add('hidden');
+                document.getElementById('step-1').classList.remove('hidden');
+
+                // Revert Indicators
+                document.getElementById('step2-indicator').classList.add('bg-gray-200', 'text-gray-400');
+                document.getElementById('step2-indicator').classList.remove('bg-urgence', 'text-white');
+                document.getElementById('progress-bar').classList.remove('w-1/2');
+                document.getElementById('progress-bar').classList.add('w-0');
+            }
+        }
+
+        function useGeolocation() {
+            const btn = document.getElementById('geo-btn');
+            btn.innerHTML = '<i data-lucide="loader" class="w-5 h-5 animate-spin"></i> Localisation...';
+
+            // Simulate Delay
+            setTimeout(() => {
+                address = "24 Bd Zerktouni, Casablanca"; // Mock
+                document.getElementById('manual-address').value = address;
+                btn.innerHTML = '<i data-lucide="check" class="w-5 h-5"></i> Position trouvée';
+                btn.classList.remove('bg-blue-50', 'text-blue-600');
+                btn.classList.add('bg-green-50', 'text-green-600');
+                lucide.createIcons();
+            }, 1000);
+        }
+
+        function goToStep3() {
+            const manualInput = document.getElementById('manual-address').value;
+            if (!manualInput) {
+                alert("Veuillez entrer une adresse ou utiliser la géolocalisation");
+                return;
+            }
+            address = manualInput;
+            document.getElementById('display-address').textContent = address;
+
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-3').classList.remove('hidden');
+
+            // Update Indicators
+            document.getElementById('step3-indicator').classList.remove('bg-gray-200', 'text-gray-400');
+            document.getElementById('step3-indicator').classList.add('bg-urgence', 'text-white');
+            document.getElementById('progress-bar').classList.remove('w-1/2');
+            document.getElementById('progress-bar').classList.add('w-full');
+
+            // Simulate "Match Found" Redirect
+            setTimeout(() => {
+                // Redirect to a success/match page or checkout
+                // For now, redirecting to checkout with urgency params
+                window.location.href = `checkout.html?service=${encodeURIComponent(selectedCategory)}&price=300&type=urgence`;
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

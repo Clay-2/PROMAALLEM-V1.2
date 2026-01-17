@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Tarifs | ProMaallem</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Montserrat:wght@600;700&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1A2B48',
+                        accent: '#C62828',
+                        'text-body': '#000000',
+                        'bg-light': '#F7FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                        title: ['Montserrat', 'sans-serif'],
+                        cairo: ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="font-sans text-text-dark bg-bg-light">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <img src="logo-promaallem.png" alt="ProMaallem" class="h-10 md:h-12 w-auto object-contain">
+            </a>
+            <div class="hidden lg:flex items-center gap-8 font-medium text-sm">
+                <a href="index.html" data-i18n="nav-home" class="hover:text-accent transition-colors">Accueil</a>
+                <a href="services.html" data-i18n="nav-services"
+                    class="hover:text-accent transition-colors">Services</a>
+                <a href="artisans.html" data-i18n="nav-artisans" class="hover:text-accent transition-colors">Nos
+                    Artisans</a>
+                <a href="booking.html" data-i18n="nav-book"
+                    class="bg-accent text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors">Réserver</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleLanguage()" id="lang-btn"
+                    class="text-xs font-bold border border-gray-200 px-3 py-1 rounded hover:bg-gray-50 transition-all font-cairo">Français</button>
+                <button class="lg:hidden text-primary" id="menu-btn">
+                    <i data-lucide="menu" class="w-8 h-8"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden) -->
+        <div id="mobile-menu"
+            class="hidden lg:hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 shadow-lg flex-col p-6 gap-4 z-40">
+            <a href="index.html" data-i18n="nav-home" class="text-lg font-medium hover:text-accent">Accueil</a>
+            <a href="services.html" data-i18n="nav-services" class="text-lg font-medium hover:text-accent">Services</a>
+            <a href="artisans.html" data-i18n="nav-artisans" class="text-lg font-medium hover:text-accent">Nos
+                Artisans</a>
+            <a href="booking.html" data-i18n="nav-book"
+                class="bg-accent text-white px-4 py-2 rounded-lg text-center font-bold">Réserver</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-primary text-white pt-32 pb-20 px-6 text-center">
+        <h1 data-i18n="prices-title" class="text-4xl md:text-5xl font-bold font-title mb-6">Transparence Totale</h1>
+        <p data-i18n="prices-subtitle" class="text-xl text-gray-200 max-w-2xl mx-auto font-light">Aucune mauvaise
+            surprise. Nos
+            prix sont fixes, connus à
+            l'avance et incluent le déplacement.</p>
+    </header>
+
+    <!-- Pricing Grid -->
+    <section class="max-w-7xl mx-auto px-6 -mt-10 pb-20">
+        <div id="pricing-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Cards injected via JS -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center">
+            <img src="logo-promaallem.png" alt="ProMaallem" class="h-10 md:h-12 w-auto object-contain mb-4">
+            <p class="text-xs text-gray-500">© 2026 ProMaallem. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/tarifs_data.js"></script>
+    <script src="js/i18n.js"></script>
+    <script>
+        lucide.createIcons();
+
+        const grid = document.getElementById('pricing-grid');
+
+        function renderTarifs() {
+            grid.innerHTML = '';
+            const lang = window.currentLang ? window.currentLang() : 'fr';
+            const currency = lang === 'ar' ? 'د.م' : 'DH';
+
+            tarifsData.forEach((item, index) => {
+                const el = document.createElement('div');
+                // Highlight middle card or just generic style
+                const isHighlight = index === 1; // Electricite as highlight for now, or just consistent style
+
+                el.className = `bg-white p-8 rounded-3xl shadow-xl flex flex-col items-center text-center border ${isHighlight ? 'border-2 border-accent relative transform md:-translate-y-4 z-10' : 'border-gray-100'}`;
+
+                let itemsHtml = '';
+                item.items.forEach(subItem => {
+                    const itemName = subItem[lang] || subItem['fr'];
+                    itemsHtml += `<li class="flex items-center justify-between w-full border-b border-gray-50 pb-2 last:border-0 last:pb-0">
+                        <span class="flex items-center gap-2 text-left"><i data-lucide="check" class="w-4 h-4 text-green-500 shrink-0"></i> ${itemName}</span>
+                        <span class="font-bold text-primary whitespace-nowrap">${subItem.price} <span class="text-xs text-gray-400 font-normal">${currency}</span></span>
+                    </li>`;
+                });
+
+                el.innerHTML = `
+                    ${isHighlight ? `<div class="absolute -top-4 bg-accent text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider" data-i18n="prices-card-popular">Le plus demandé</div>` : ''}
+                    
+                    <div class="w-16 h-16 ${isHighlight ? 'bg-orange-50 text-accent' : 'bg-blue-50 text-primary'} rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="${item.icon}" class="w-8 h-8"></i>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold font-title mb-2 text-primary">${item.title[lang] || item.title['fr']}</h3>
+                    <div class="text-sm text-gray-400 mb-6 flex items-center gap-1">
+                        <span data-i18n="prices-from">À partir de</span>
+                        <span class="text-2xl font-bold text-accent">${item.basePrice}</span>
+                        <span>${currency}</span>
+                    </div>
+
+                    <ul class="text-sm text-gray-600 w-full mb-8 space-y-3">
+                        ${itemsHtml}
+                    </ul>
+
+                    <a href="booking.html" data-i18n="prices-btn-order"
+                        class="w-full mt-auto ${isHighlight ? 'bg-accent text-white shadow-lg shadow-accent/20 border border-transparent' : 'border-2 border-primary text-primary hover:bg-primary hover:text-white'} font-bold py-3 rounded-xl transition-all">
+                        Commander
+                    </a>
+                `;
+                grid.appendChild(el);
+            });
+            lucide.createIcons();
+
+            // Re-apply translations for static UI elements newly injected (like "Commander" button)
+            if (window.applyLanguage) window.applyLanguage(lang);
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ensure i18n is ready or wait for it
+            if (window.currentLang) {
+                renderTarifs();
+            } else {
+                // Fallback or retry
+                setTimeout(renderTarifs, 100);
+            }
+        });
+
+        // Toggle handling
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+        }
+
+        // Observer for language change to re-render dynamic content
+        const observer = new MutationObserver(() => {
+            renderTarifs();
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+
+    </script>
+</body>
+
+</html>

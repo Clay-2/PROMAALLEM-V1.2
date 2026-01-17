@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture #INV-2026-001 | ProMaallem</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cooper+Hewitt:wght@700&family=Montserrat:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Reset & Base */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #F8FAFC;
+            font-family: 'Inter', 'Canva Sans', sans-serif;
+            /* Fallback to Inter which is similar to Canva Sans */
+            color: #1e293b;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        button {
+            display: none;
+            /* Hide print button in print mode usually, but we'll show it for web view */
+        }
+
+        .invoice-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #FFFFFF;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-radius: 0;
+            /* A4 Paper feel */
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            background-color: #03045E;
+            /* Bleu Nuit */
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .logo {
+            font-family: 'Cooper Hewitt', 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .invoice-meta {
+            text-align: right;
+        }
+
+        .invoice-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .invoice-number {
+            font-family: 'Cooper Hewitt', 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        /* Body */
+        .content {
+            padding: 50px 40px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94A3B8;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .info-block p {
+            margin: 5px 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .info-block strong {
+            color: #03045E;
+            font-weight: 600;
+        }
+
+        /* Artisan Badge */
+        .artisan-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #E6FFFA;
+            color: #0A9396;
+            /* Teal */
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+
+        th {
+            text-align: left;
+            padding: 15px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #03045E;
+            border-bottom: 2px solid #4361EE;
+            /* Royal Blue */
+        }
+
+        td {
+            padding: 20px 15px;
+            border-bottom: 1px solid #F1F5F9;
+            font-size: 14px;
+        }
+
+        .col-right {
+            text-align: right;
+        }
+
+        /* Totals */
+        .totals {
+            margin-left: auto;
+            width: 300px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .grand-total {
+            border-top: 2px solid #4361EE;
+            padding-top: 20px;
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #03045E;
+            font-family: 'Cooper Hewitt', 'Montserrat', sans-serif;
+        }
+
+        /* Stamp */
+        .stamp-container {
+            position: absolute;
+            bottom: 150px;
+            left: 50px;
+            transform: rotate(-15deg);
+        }
+
+        .stamp {
+            border: 3px solid #0A9396;
+            /* Teal */
+            color: #0A9396;
+            padding: 10px 30px;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            border-radius: 10px;
+            opacity: 0.8;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #F8FAFC;
+            padding: 30px 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #64748B;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        .guarantee {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #03045E;
+            font-weight: 600;
+        }
+
+        /* Print Button Styles */
+        .print-btn-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .btn-print {
+            display: inline-block;
+            background: #4361EE;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(67, 97, 238, 0.3);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-print:hover {
+            background: #3651d4;
+        }
+
+        @media print {
+            body {
+                background: white;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .invoice-container {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .btn-print,
+            .print-btn-container {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="print-btn-container">
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimer la facture</button>
+    </div>
+
+    <div class="invoice-container">
+
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">ProMaallem.</div>
+            <div class="invoice-meta">
+                <div class="invoice-title">Facture</div>
+                <div class="invoice-number">#INV-2026-001</div>
+                <div style="font-size: 12px; opacity: 0.8; margin-top: 5px;">Date: 14 Jan. 2026</div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content">
+
+            <div class="grid-2">
+                <!-- Client -->
+                <div class="info-block">
+                    <div class="section-title">Facturé à</div>
+                    <strong>M. Karim Alaoui</strong>
+                    <p>Appt 4, Immeuble 12<br>Résidence Les Fleurs, Maârif<br>Casablanca, Maroc</p>
+                    <p style="margin-top: 10px;">+212 6 00 00 00 00</p>
+                </div>
+
+                <!-- Artisan -->
+                <div class="info-block">
+                    <div class="section-title">Intervention par</div>
+                    <strong>Ahmed El Mansouri</strong>
+                    <p>Plomberie & Chauffage</p>
+                    <div class="artisan-badge">
+                        <span>✓</span> Artisan Certifié
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50%;">Description</th>
+                        <th class="col-right">Qté</th>
+                        <th class="col-right">Prix Unitaire</th>
+                        <th class="col-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Réparation Fuite d'Eau (Urgence)</strong><br>
+                            <span style="font-size: 12px; color: #64748B;">Diagnostic, remplacement joint et
+                                soudure.</span>
+                        </td>
+                        <td class="col-right">1</td>
+                        <td class="col-right">300.00 DH</td>
+                        <td class="col-right">300.00 DH</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Déplacement</strong><br>
+                            <span style="font-size: 12px; color: #64748B;">Forfait zone Casablanca centre.</span>
+                        </td>
+                        <td class="col-right">1</td>
+                        <td class="col-right">50.00 DH</td>
+                        <td class="col-right">50.00 DH</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Totals -->
+            <div class="totals">
+                <div class="total-row">
+                    <span>Sous-Total</span>
+                    <span>350.00 DH</span>
+                </div>
+                <div class="total-row">
+                    <span>TVA (20%)</span>
+                    <span>70.00 DH</span>
+                </div>
+                <div class="total-row grand-total">
+                    <span>Total TTC</span>
+                    <span>420.00 DH</span>
+                </div>
+            </div>
+
+            <!-- Stamp -->
+            <div class="stamp-container">
+                <div class="stamp">PAYÉ</div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="guarantee">
+                <span>🛡️</span> Satisfaction 100% garantie par ProMaallem
+            </div>
+            <p>
+                ProMaallem SARL - Boulevard d'Anfa, Casablanca - ICE: 123456789<br>
+                Merci de votre confiance. Pour toute question : support@promaallem.ma
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

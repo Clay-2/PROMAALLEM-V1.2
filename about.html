@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qui Sommes-Nous | ProMaallem - Identité & Confiance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #ffffff;
+            color: #03045E;
+            /* Bleu Nuit */
+        }
+
+        .text-night-blue {
+            color: #03045E;
+        }
+
+        .text-royal-blue {
+            color: #4361EE;
+        }
+
+        .bg-night-blue {
+            background-color: #03045E;
+        }
+
+        .bg-royal-blue {
+            background-color: #4361EE;
+        }
+
+        /* Subtle gradients/effects */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(67, 97, 238, 0.1);
+        }
+
+        .hero-pattern {
+            background-image: radial-gradient(#4361EE 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.05;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-blue-100 selection:text-blue-900">
+
+    <!-- Navigation (Placeholder for consistency) -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer"
+                    onclick="window.location.href='index.html'">
+                    <!-- Logo Text mock -->
+                    <span class="text-2xl font-bold text-night-blue tracking-tight">Pro<span
+                            class="text-royal-blue">Maallem</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-500 hover:text-royal-blue font-medium transition">Accueil</a>
+                    <a href="services.html"
+                        class="text-gray-500 hover:text-royal-blue font-medium transition">Services</a>
+                    <a href="#" class="text-royal-blue font-bold transition">Qui Sommes-Nous</a>
+                </div>
+                <div>
+                    <a href="booking.html"
+                        class="bg-royal-blue text-white px-6 py-2.5 rounded-full font-bold shadow-lg hover:shadow-xl hover:scale-105 transition transform duration-200">
+                        Réserver
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section: La Mission -->
+    <section class="relative pt-32 pb-20 overflow-hidden">
+        <div class="absolute inset-0 hero-pattern pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span
+                class="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-royal-blue text-sm font-bold tracking-wide mb-6 uppercase">
+                Notre Raison d'être
+            </span>
+            <h1 class="text-5xl md:text-7xl font-bold mb-8 leading-tight text-night-blue">
+                Simplifier le quotidien des <span class="text-royal-blue">foyers marocains</span>.
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                ProMaallem est né d'un constat simple : trouver un artisan fiable au Maroc ne devrait pas être un
+                parcours du combattant. Nous réinventons le service à domicile avec confiance, qualité et simplicité.
+            </p>
+        </div>
+    </section>
+
+    <!-- Les 3 Piliers de Confiance -->
+    <section class="py-20 bg-gray-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-night-blue mb-4">Nos Engagements</h2>
+                <div class="w-24 h-1 bg-royal-blue mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Pilier 1 -->
+                <div
+                    class="bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 group">
+                    <div
+                        class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition duration-300">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-royal-blue"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-night-blue mb-4">Artisans Vérifiés</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Chaque Maallem passe par un processus de sélection rigoureux : vérification d'identité, test de
+                        compétences et contrôle des références. Seuls les meilleurs rejoignent notre réseau.
+                    </p>
+                </div>
+
+                <!-- Pilier 2 -->
+                <div
+                    class="bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 group">
+                    <div
+                        class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition duration-300">
+                        <i data-lucide="tag" class="w-8 h-8 text-royal-blue"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-night-blue mb-4">Transparence Totale</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Fini les surprises. Nos prix sont clairs, fixes et communiqués avant chaque intervention. Vous
+                        payez exactement ce qui a été convenu.
+                    </p>
+                </div>
+
+                <!-- Pilier 3 -->
+                <div
+                    class="bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 group">
+                    <div
+                        class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition duration-300">
+                        <i data-lucide="heart-handshake" class="w-8 h-8 text-royal-blue"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-night-blue mb-4">Garantie Satisfaction</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Votre satisfaction est notre priorité absolue. Si une prestation ne répond pas à nos standards
+                        de qualité, nous nous engageons à rectifier la situation sans frais supplémentaires.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- L'Équipe (Founders) -->
+    <section class="py-24 relative overflow-hidden">
+        <!-- Decorative element -->
+        <div
+            class="absolute top-0 right-0 w-64 h-64 bg-royal-blue/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                <div>
+                    <span class="text-royal-blue font-bold tracking-wider uppercase text-sm mb-2 block">L'Esprit
+                        ProMaallem</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-night-blue mb-6">Derrière la plateforme,<br>une
+                        équipe passionnée.</h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Nous sommes Oussama, Meryem et Hiba. Trois entrepreneurs marocains unis par une vision commune :
+                        moderniser le secteur des services tout en valorisant le savoir-faire de nos artisans locaux.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-10 leading-relaxed">
+                        ProMaallem n'est pas juste une application, c'est le pont de confiance que nous avons bâti pour
+                        relier chaque foyer à l'expert dont il a besoin.
+                    </p>
+
+                    <a href="contact.html"
+                        class="inline-flex items-center gap-2 text-royal-blue font-bold hover:gap-3 transition-all">
+                        Rejoignez l'aventure
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                </div>
+
+                <!-- Team Cards / Visuals -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+
+                    <!-- Founder 1 -->
+                    <div class="relative group">
+                        <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-lg bg-gray-200 relative">
+                            <!-- Using a generated image placeholder or solid color for now as per constraints, 
+                                  but in real app would be real photos. 
+                                  Using abstract gradients for premium feel if photos missing. -->
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-blue-100 to-white flex items-center justify-center text-gray-400">
+                                <i data-lucide="user" class="w-12 h-12 opacity-50"></i>
+                            </div>
+                            <!-- Overlay -->
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-night-blue/90 to-transparent flex flex-col justify-end p-6 translate-y-4 group-hover:translate-y-0 transition duration-300">
+                                <h4 class="text-white font-bold text-xl">Oussama</h4>
+                                <span class="text-blue-200 text-sm">Co-Fondateur & Tech</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Founder 2 (Lifted up slightly for dynamic layout) -->
+                    <div class="relative group sm:-mt-12">
+                        <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-lg bg-gray-200 relative">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-blue-100 to-white flex items-center justify-center text-gray-400">
+                                <i data-lucide="user" class="w-12 h-12 opacity-50"></i>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-night-blue/90 to-transparent flex flex-col justify-end p-6 translate-y-4 group-hover:translate-y-0 transition duration-300">
+                                <h4 class="text-white font-bold text-xl">Meryem</h4>
+                                <span class="text-blue-200 text-sm">Co-Fondatrice & Ops</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Founder 3 -->
+                    <div class="relative group">
+                        <div class="aspect-[3/4] rounded-2xl overflow-hidden shadow-lg bg-gray-200 relative">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-blue-100 to-white flex items-center justify-center text-gray-400">
+                                <i data-lucide="user" class="w-12 h-12 opacity-50"></i>
+                            </div>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-night-blue/90 to-transparent flex flex-col justify-end p-6 translate-y-4 group-hover:translate-y-0 transition duration-300">
+                                <h4 class="text-white font-bold text-xl">Hiba</h4>
+                                <span class="text-blue-200 text-sm">Co-Fondatrice & Brand</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Simple -->
+    <footer class="bg-night-blue text-white py-12">
+        <div
+            class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-2xl font-bold tracking-tight">Pro<span class="text-royal-blue">Maallem</span></div>
+            <div class="text-gray-400 text-sm">© 2026 ProMaallem. Tous droits réservés.</div>
+            <div class="flex space-x-6">
+                <a href="#" class="text-gray-400 hover:text-white transition"><i data-lucide="instagram"
+                        class="w-5 h-5"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i data-lucide="facebook"
+                        class="w-5 h-5"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition"><i data-lucide="linkedin"
+                        class="w-5 h-5"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Start Icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

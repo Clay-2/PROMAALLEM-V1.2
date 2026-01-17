@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Services | ProMaallem</title>
+
+    <!-- Typography: Montserrat & Open Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Montserrat:wght@600;700&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1A2B48', // Bleu Marine
+                        accent: '#C62828', // Rouge Royal
+                        'text-body': '#000000', // Noir Mat
+                        'bg-light': '#F7FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                        title: ['Montserrat', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                        'hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body class="font-sans text-text-body bg-bg-light">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <img src="logo-promaallem.png" alt="ProMaallem" class="h-10 md:h-12 w-auto object-contain">
+            </a>
+            <div class="hidden lg:flex items-center gap-8 font-medium text-sm">
+                <a href="index.html" data-i18n="nav-home" class="hover:text-accent transition-colors">Accueil</a>
+                <a href="services.html" data-i18n="nav-services"
+                    class="text-accent font-semibold transition-colors">Services</a>
+                <a href="booking.html" data-i18n="nav-book"
+                    class="bg-accent text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors">Réserver</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleLanguage()" id="lang-btn"
+                    class="text-xs font-bold border border-gray-200 px-3 py-1 rounded hover:bg-gray-50 transition-all font-cairo">Français</button>
+                <button class="lg:hidden text-primary" id="menu-btn">
+                    <i data-lucide="menu" class="w-8 h-8"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu (Hidden) -->
+        <div id="mobile-menu"
+            class="hidden lg:hidden absolute top-20 left-0 w-full bg-white border-b border-gray-100 shadow-lg flex-col p-6 gap-4 z-40">
+            <a href="index.html" data-i18n="nav-home" class="text-lg font-medium hover:text-accent">Accueil</a>
+            <a href="services.html" data-i18n="nav-services" class="text-lg font-medium text-accent">Services</a>
+            <a href="booking.html" data-i18n="nav-book"
+                class="bg-accent text-white px-4 py-2 rounded-lg text-center font-bold">Réserver</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-primary text-white pt-32 pb-20 px-6 text-center">
+        <h1 data-i18n="services-title" class="text-4xl md:text-5xl font-bold font-title mb-6">Nos Services</h1>
+        <p data-i18n="services-subtitle" class="text-xl text-gray-200 max-w-2xl mx-auto font-light">Une expertise
+            professionnelle pour chaque besoin
+            de votre maison.</p>
+
+        <!-- Search Input -->
+        <div class="max-w-md mx-auto mt-8 relative">
+            <input type="text" id="search-input" data-i18n="services-search-placeholder"
+                placeholder="Rechercher un service (ex: Plomberie)..."
+                class="w-full pl-12 pr-4 py-4 rounded-full text-text-body focus:outline-none focus:ring-4 focus:ring-accent/30 shadow-lg">
+            <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+        </div>
+    </header>
+
+    <!-- Service Grid -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+        <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Cards will be injected here by JS -->
+        </div>
+
+        <div id="no-results" class="hidden text-center py-12">
+            <i data-lucide="frown" class="w-16 h-16 text-gray-300 mx-auto mb-4"></i>
+            <h3 data-i18n="services-no-results" class="text-xl font-bold text-gray-500">Aucun service trouvé</h3>
+            <p data-i18n="services-try-again" class="text-gray-400">Essayez une autre recherche.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center">
+            <img src="logo-promaallem.png" alt="ProMaallem" class="h-10 md:h-12 w-auto object-contain mb-4">
+            <p class="text-xs text-gray-500">© 2026 ProMaallem. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Data Structure with Translations
+        const services = [
+            {
+                id: 'plomberie',
+                title: 'Plomberie',
+                title_ar: 'سباكة',
+                title_en: 'Plumbing',
+                description: 'Fuites, robinetterie, chauffe-eau, débouchage.',
+                description_ar: 'تسربات، تركيب صنابير، سخانات مياه، تسليك مجاري.',
+                description_en: 'Leaks, faucets, water heaters, unclogging.',
+                price: '150 DH',
+                iconName: 'droplet',
+                isPopular: false
+            },
+            {
+                id: 'electricite',
+                title: 'Électricité',
+                title_ar: 'كهرباء',
+                title_en: 'Electricity',
+                description: 'Pannes, installation prises, tableaux électriques.',
+                description_ar: 'انقطاع الكهرباء، تركيب مقابس، لوحات كهربائية.',
+                description_en: 'Outages, socket installation, electrical panels.',
+                price: '120 DH',
+                iconName: 'zap',
+                isPopular: true
+            },
+            {
+                id: 'serrurerie',
+                title: 'Serrurerie',
+                title_ar: 'أقفال وأبواب',
+                title_en: 'Locksmith',
+                description: 'Ouverture de porte claquée, changement de serrure.',
+                description_ar: 'فتح الأبواب المغلقة، تغيير الأقفال، تأمين الأبواب.',
+                description_en: 'Door opening, lock changing, security.',
+                price: '200 DH',
+                iconName: 'key',
+                isPopular: false
+            },
+            {
+                id: 'climatisation',
+                title: 'Climatisation',
+                title_ar: 'تكييف',
+                title_en: 'Air Conditioning',
+                description: 'Entretien, nettoyage filtres, recharge gaz.',
+                description_ar: 'صيانة، تنظيف الفلاتر، شحن الغاز، تركيب.',
+                description_en: 'Maintenance, filter cleaning, gas refill.',
+                price: '250 DH',
+                iconName: 'thermometer-snowflake',
+                isPopular: false
+            },
+            {
+                id: 'peinture',
+                title: 'Peinture',
+                title_ar: 'صباغة',
+                title_en: 'Painting',
+                description: 'Retouches, peinture murs et plafonds, papier.',
+                description_ar: 'رتوش، صباغة الجدران والأسقف، ورق جدران.',
+                description_en: 'Touch-ups, wall and ceiling painting, wallpaper.',
+                price: '300 DH',
+                iconName: 'paint-bucket',
+                isPopular: false
+            },
+            {
+                id: 'bricolage',
+                title: 'Bricolage',
+                title_ar: 'إصلاحات عامة',
+                title_en: 'Handyman',
+                description: 'Montage de meubles, fixation tringles, petits travaux.',
+                description_ar: 'تركيب الأثاث، تعليق الستائر، إصلاحات صغيرة.',
+                description_en: 'Furniture assembly, curtain rods, small repairs.',
+                price: '100 DH',
+                iconName: 'hammer',
+                isPopular: false
+            },
+            {
+                id: 'menage',
+                title: 'Femme de Ménage',
+                title_ar: 'عاملة نظافة',
+                title_en: 'Housekeeping',
+                description: 'Ménage standard, grand ménage, repassage.',
+                description_ar: 'تنظيف يومي، تخمال شامل، تحديد الملابس.',
+                description_en: 'Cleaning, deep cleaning, ironing services.',
+                price: '200 DH',
+                iconName: 'sparkles', // Needs lucide icon
+                isPopular: true
+            }
+        ];
+
+        // 2. Rendering Function
+        const grid = document.getElementById('services-grid');
+        const noResults = document.getElementById('no-results');
+
+        function renderServices(filterText = '') {
+            grid.innerHTML = '';
+
+            // Get current language from strict source of truth (html lang attribute or storage)
+            // Accessing global currentLang might rely on race condition with i18n.js, 
+            // but i18n.js runs DOMContentLoaded. We can check document.documentElement.lang
+            const lang = document.documentElement.lang || 'fr';
+
+            const filtered = services.filter(service => {
+                // Search based on current language fields
+                let t = service.title;
+                let d = service.description;
+                if (lang === 'ar') { t = service.title_ar; d = service.description_ar; }
+                if (lang === 'en') { t = service.title_en; d = service.description_en; }
+
+                return t.toLowerCase().includes(filterText.toLowerCase()) ||
+                    d.toLowerCase().includes(filterText.toLowerCase())
+            });
+
+            if (filtered.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+
+                filtered.forEach(service => {
+                    // Determine content
+                    let title = service.title;
+                    let desc = service.description;
+                    let popularText = 'POPULAIRE';
+
+                    if (lang === 'ar') {
+                        title = service.title_ar;
+                        desc = service.description_ar;
+                        popularText = 'شائع';
+                    } else if (lang === 'en') {
+                        title = service.title_en;
+                        desc = service.description_en;
+                        popularText = 'POPULAR';
+                    }
+
+                    // Create Card
+                    const card = document.createElement('a');
+                    card.href = `booking.html?service=${service.id}`;
+                    card.className = `service-card bg-white rounded-2xl p-8 relative flex flex-col items-center text-center cursor-pointer border transition-colors ${service.isPopular ? 'border-accent shadow-md' : 'border-gray-100 shadow-soft'}`;
+
+                    // Popular Badge
+                    let badgeHTML = '';
+                    if (service.isPopular) {
+                        badgeHTML = `<span class="absolute -top-3 bg-accent text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">${popularText}</span>`;
+                    }
+
+                    // Content
+                    card.innerHTML = `
+                        ${badgeHTML}
+                        <div class="w-16 h-16 bg-gray-50 text-accent rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="${service.iconName}" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="font-title font-bold text-xl text-primary mb-3">${title}</h3>
+                        <p class="text-sm font-sans text-gray-500 mb-6 flex-1 text-center">${desc}</p>
+                        <div class="border-t border-gray-50 w-full pt-4">
+                            <span class="text-accent font-bold font-title">${service.price}</span>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+                lucide.createIcons();
+            }
+        }
+
+        // 3. Init
+        // Wait for i18n to set initial language? 
+        // i18n.js runs on DOMContentLoaded. We should listen for a custom event or retry.
+        // Or simply: renderServices() initially (fr default), and hook into toggleButton.
+
+        // HACK: Override the global toggleLanguage from i18n.js to re-render grid
+        // We can attach a listener to the button if possible, but the button is also dynamic in some pages.
+        // In services.html, we modified the button to call toggleLanguage().
+        // Let's modify toggleLanguage in i18n.js? No, simpler to monitor changes or just expose an event.
+        // I will add a MutationObserver on html lang attribute!
+
+        const observer = new MutationObserver(() => {
+            renderServices(document.getElementById('search-input').value);
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+
+        // Initial Render
+        renderServices();
+
+        // 4. Search Logic
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            renderServices(e.target.value);
+        });
+
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+    </script>
+    <script src="js/i18n.js"></script>
+</body>
+
+</html>

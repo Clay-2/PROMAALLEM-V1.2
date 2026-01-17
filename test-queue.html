@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Queue & Progress Bar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-lg text-center">
+        <h1 class="text-2xl font-bold mb-6 text-gray-800">Test Système IA</h1>
+
+        <button onclick="startTest()"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded transition duration-200">
+            Lancer une demande SOS
+        </button>
+
+        <!-- Mount Point for the Progress Bar -->
+        <div id="progress-mount-point" class="mt-8"></div>
+
+        <div id="result" class="mt-6 p-4 bg-gray-50 rounded border border-gray-200 text-left text-sm font-mono hidden">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/polling.js"></script>
+    <script src="js/progress-logic.js"></script>
+
+    <script>
+        // Load the HTML component
+        fetch('components/progress-bar.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('progress-mount-point').innerHTML = html;
+            });
+
+        async function startTest() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.classList.add('hidden');
+            resultDiv.innerText = "";
+
+            // 1. Start UI Animation
+            startProgressSequence();
+
+            try {
+                // 2. Call Backend (Port 3001)
+                const response = await fetch('http://localhost:3001/api/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        description: "Fuite d'eau majeure cuisine",
+                        category: "Plomberie",
+                        location: "Casablanca"
+                    })
+                });
+
+                if (!response.ok) throw new Error("Erreur serveur");
+
+                const data = await response.json();
+                console.log("Request ID:", data.requestId);
+
+                // 3. Start Polling
+                // We overlap polling with the animation
+                pollAIStatus(
+                    data.requestId,
+                    (result) => {
+                        console.log("Success:", result);
+                        completeProgressSequence(true);
+                        resultDiv.classList.remove('hidden');
+                        resultDiv.innerHTML = "<strong>Résultat:</strong><br>" + JSON.stringify(result, null, 2);
+                    },
+                    (error) => {
+                        console.error("Error:", error);
+                        completeProgressSequence(false);
+                        resultDiv.classList.remove('hidden');
+                        resultDiv.innerText = "Erreur: " + error;
+                    }
+                );
+
+            } catch (e) {
+                console.error(e);
+                completeProgressSequence(false);
+                resultDiv.classList.remove('hidden');
+                resultDiv.innerText = "Erreur de connexion server (Check Console)";
+            }
+        }
+    </script>
+</body>
+
+</html>

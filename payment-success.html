@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paiement Réussi | ProMaallem</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Montserrat:wght@600;700&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1A2B48',
+                        accent: '#C62828',
+                        'bg-light': '#F7FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                        title: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-bg-light min-h-screen flex items-center justify-center p-6">
+
+    <div class="max-w-md w-full bg-white rounded-3xl shadow-xl p-8 text-center relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 left-0 w-full h-2 bg-green-500"></div>
+
+        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i data-lucide="check-circle-2" class="w-10 h-10 text-green-600"></i>
+        </div>
+
+        <h1 data-i18n="payment-success-title" class="text-2xl font-bold font-title text-primary mb-2">Paiement Confirmé
+            !</h1>
+        <p data-i18n="payment-success-desc" class="text-gray-500 mb-8">Votre commande #TRX-99281 a été réglée avec
+            succès.</p>
+
+        <div class="bg-gray-50 rounded-xl p-6 mb-8 text-left space-y-3">
+            <div class="flex justify-between text-sm">
+                <span data-i18n="payment-success-amount" class="text-gray-500">Montant payé</span>
+                <span class="font-bold text-primary">165.00 DH</span>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span data-i18n="payment-success-date" class="text-gray-500">Date</span>
+                <span class="font-bold text-primary">10 Janv. 2026</span>
+            </div>
+            <div class="flex justify-between text-sm">
+                <span data-i18n="payment-success-card" class="text-gray-500">Carte</span>
+                <span class="font-bold text-primary">•••• 4242</span>
+            </div>
+        </div>
+
+        <button
+            class="w-full bg-primary text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all mb-4">
+            <i data-lucide="download" class="w-5 h-5"></i>
+            <span data-i18n="payment-success-btn-download">Télécharger mon reçu PDF</span>
+        </button>
+
+        <a href="chat.html?artisan_id=1"
+            class="w-full block bg-green-500 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all shadow-lg shadow-green-200 mb-6">
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+            <span data-i18n="btn-chat">Discuter avec le Maallem</span>
+        </a>
+
+        <a href="index.html" data-i18n="payment-success-return"
+            class="block text-sm text-gray-500 font-medium hover:text-accent">Retour à l'accueil</a>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="js/i18n.js"></script>
+</body>
+
+</html>
